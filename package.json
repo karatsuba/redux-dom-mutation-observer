@@ -1,27 +1,36 @@
 {
-  "name": "redux-dom-mutation-observer",
-  "version": "0.0.0",
-  "description": "A Redux middleware to handle DOM mutations via MutationObserver.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/karatsuba/redux-dom-mutation-observer.git"
-  },
-  "author": "Roman Chukhan",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/karatsuba/redux-dom-mutation-observer/issues"
-  },
-  "homepage": "https://github.com/karatsuba/redux-dom-mutation-observer#readme",
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1"
-  }
+    "name": "redux-dom-mutation-observer",
+    "version": "0.0.0",
+    "description": "A Redux middleware to handle DOM mutations via MutationObserver.",
+    "main": "index.js",
+    "scripts": {
+        "clean": "rm -rf ./dist",
+        "dev": "npm run clean && webpack --progress --watch",
+        "build:dev": "npm run clean && webpack --progress",
+        "build:prod": "npm run clean && webpack --progress --env.production",
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/karatsuba/redux-dom-mutation-observer.git"
+    },
+    "author": "Roman Chukhan",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/karatsuba/redux-dom-mutation-observer/issues"
+    },
+    "homepage": "https://github.com/karatsuba/redux-dom-mutation-observer#readme",
+    "dependencies": {},
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.23.0",
+        "@typescript-eslint/parser": "^2.23.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "prettier": "^1.19.1",
+        "ts-loader": "^6.2.1",
+        "typescript": "^3.8.3",
+        "webpack": "^4.42.0",
+        "webpack-cli": "^3.3.11"
+    }
 }
