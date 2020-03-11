@@ -5,6 +5,9 @@ node_modules/
 .vscode
 *.code-workspace
 
+#nvm
+.nvmrc
+
 # misc
 .DS_Store
 .env.local
