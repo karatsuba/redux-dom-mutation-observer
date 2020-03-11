@@ -1,8 +1,10 @@
 import { OBSERVE, DISCONNECT, Actions } from './types';
 
-export const observe = (): Actions => ({
+export const observe = (targetId: string): Actions => ({
     type: OBSERVE,
-    payload: null
+    payload: {
+        targetId
+    }
 });
 
 export const disconnect = (): Actions => ({

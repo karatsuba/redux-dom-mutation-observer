@@ -4,7 +4,9 @@ export const OBSERVE = `${PREFIX}:OBSERVE`;
 
 export type ObserveAction = {
     type: typeof OBSERVE;
-    payload: any;
+    payload: {
+        targetId: string;
+    };
 };
 
 export const DISCONNECT = `${PREFIX}:DISCONNECT`;
