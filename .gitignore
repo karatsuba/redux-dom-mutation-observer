@@ -1,8 +1,9 @@
 # Dependency directories
 node_modules/
 
-# VSCode settings
+# VSCode settings & workspace
 .vscode
+*.code-workspace
 
 # misc
 .DS_Store
