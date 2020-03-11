@@ -4,7 +4,11 @@
     "description": "A Redux middleware to handle DOM mutations via MutationObserver.",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "clean": "rm -rf ./dist",
+        "dev": "npm run clean && webpack --progress --watch",
+        "build:dev": "npm run clean && webpack --progress",
+        "build:prod": "npm run clean && webpack --progress --env.production",
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
     },
     "repository": {
         "type": "git",
@@ -24,6 +28,9 @@
         "eslint-config-prettier": "^6.10.0",
         "eslint-plugin-prettier": "^3.1.2",
         "prettier": "^1.19.1",
-        "webpack": "^4.42.0"
+        "ts-loader": "^6.2.1",
+        "typescript": "^3.8.3",
+        "webpack": "^4.42.0",
+        "webpack-cli": "^3.3.11"
     }
 }
