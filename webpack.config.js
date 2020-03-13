@@ -3,9 +3,12 @@ const path = require('path');
 const DIST = path.resolve(__dirname, './dist');
 const SRC = path.resolve(__dirname, './src/index.ts');
 
-const getBaseConfig = production => ({
+module.exports = ({ production = false } = {}) => ({
     mode: production ? 'production' : 'development',
-    devtool: production ? false : 'eval',
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
+    entry: SRC,
     module: {
         rules: [
             {
@@ -15,19 +18,10 @@ const getBaseConfig = production => ({
             }
         ]
     },
-    resolve: {
-        extensions: ['.ts', '.js']
+    output: {
+        filename: 'index.js',
+        path: DIST,
+        library: 'ReduxDOMMutationObserver',
+        libraryTarget: 'umd'
     }
 });
-
-module.exports = ({ production = false } = {}) => {
-    const base = getBaseConfig(production);
-    return {
-        ...base,
-        entry: SRC,
-        output: {
-            filename: 'index.js',
-            path: DIST
-        }
-    };
-};
