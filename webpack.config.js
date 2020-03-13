@@ -1,7 +1,9 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const DIST = path.resolve(__dirname, './dist');
 const SRC = path.resolve(__dirname, './src/index.ts');
+const SRC_TYPES = path.resolve(__dirname, './src/index.d.ts');
 
 const getBaseConfig = production => ({
     mode: production ? 'production' : 'development',
@@ -29,6 +31,13 @@ module.exports = ({ production = false } = {}) => {
             filename: 'index.js',
             path: DIST
         },
-        plugins: []
+        plugins: [
+            new CopyPlugin([
+                {
+                    from: SRC_TYPES,
+                    to: DIST
+                }
+            ])
+        ]
     };
 };
