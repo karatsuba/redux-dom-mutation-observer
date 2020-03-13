@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "description": "A Redux middleware to handle DOM mutations via MutationObserver.",
     "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "types": "types/index.d.ts",
     "scripts": {
         "clean": "rm -rf ./dist",
         "dev": "npm run clean && webpack --progress --watch",
