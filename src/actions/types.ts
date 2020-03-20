@@ -15,4 +15,13 @@ export type DisconectAction = {
     type: typeof DISCONNECT;
 };
 
-export type Actions = ObserveAction | DisconectAction;
+export const MUTATION_RECORD = `${PREFIX}:MUTATION_RECORD`;
+
+export type MutationRecordAction = {
+    type: typeof MUTATION_RECORD;
+    payload: {
+        mutation: MutationRecord;
+    };
+};
+
+export type Actions = ObserveAction | DisconectAction | MutationRecordAction;

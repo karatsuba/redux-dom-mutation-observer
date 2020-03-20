@@ -1,11 +1,12 @@
 import { MiddlewareAPI } from 'redux';
 import { ObserveAction } from './actions/types';
+import { mutationRecord } from './actions/actions';
 
 export default class ReduxMutationObserver {
-    private options: any;
+    private options: object;
     private observer: MutationObserver | null = null;
 
-    constructor(options: any) {
+    constructor(options: object) {
         this.options = options;
     }
 
@@ -16,10 +17,7 @@ export default class ReduxMutationObserver {
     observe = ({ dispatch }: MiddlewareAPI, { payload }: ObserveAction): void => {
         if (!this.observer) {
             this.observer = new MutationObserver((mutations: MutationRecord[]) => {
-                mutations.forEach(mutation => {
-                    console.log('HANDLE MUTATION HERE', mutation);
-                    // handler.handle(mutation)
-                });
+                mutations.forEach(mutation => dispatch(mutationRecord(mutation)));
             });
         }
 
@@ -29,7 +27,9 @@ export default class ReduxMutationObserver {
         }
     };
 
-    disconnect = ({ dispatch }: MiddlewareAPI): void => {
-        console.log('DISCONECT HERE');
+    disconnect = (): void => {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
     };
 }
