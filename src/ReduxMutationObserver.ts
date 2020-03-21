@@ -1,12 +1,12 @@
 import { MiddlewareAPI } from 'redux';
-import { ObserveAction } from './actions/types';
+import { ObserveAction } from './actions/actions';
 import { mutationRecord } from './actions/actions';
 
 export default class ReduxMutationObserver {
-    private options: object;
+    private options: MutationObserverInit;
     private observer: MutationObserver | null = null;
 
-    constructor(options: object) {
+    constructor(options: MutationObserverInit) {
         this.options = options;
     }
 

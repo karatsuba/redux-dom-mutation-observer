@@ -1,14 +1,13 @@
 import { Middleware, MiddlewareAPI, Dispatch } from 'redux';
 import ReduxMutationObserver from '../ReduxMutationObserver';
-import { OBSERVE, DISCONNECT, Actions, ObserveAction } from '../actions/types';
+import { OBSERVE, DISCONNECT } from '../actions/types';
+import { Action, ObserveAction } from '../actions/actions';
 
-export default (options: any): Middleware => {
+export default (options: MutationObserverInit): Middleware => {
     const reduxMutationObserver = new ReduxMutationObserver(options);
 
-    return (store: MiddlewareAPI) => (next: Dispatch<Actions>) => (action: Actions) => {
+    return (store: MiddlewareAPI) => (next: Dispatch) => (action: Action) => {
         if (action.type === OBSERVE) {
-            // todo: check weird bug with ts compiler
-            // action type should be resolved by compiler here as ObserveAction
             reduxMutationObserver.observe(store, action as ObserveAction);
         }
 
