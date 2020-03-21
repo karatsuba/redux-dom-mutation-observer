@@ -4,6 +4,9 @@ node_modules/
 # build directoty
 dist/
 
+# ts types declarations
+types/
+
 # VSCode settings & workspace
 .vscode
 *.code-workspace

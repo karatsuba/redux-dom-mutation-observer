@@ -2,7 +2,8 @@
     "name": "redux-dom-mutation-observer",
     "version": "0.0.0",
     "description": "A Redux middleware to handle DOM mutations via MutationObserver.",
-    "main": "index.js",
+    "main": "dist/index.js",
+    "types": "types/index.d.ts",
     "scripts": {
         "clean": "rm -rf ./dist",
         "dev": "npm run clean && webpack --progress --watch",
@@ -20,7 +21,9 @@
         "url": "https://github.com/karatsuba/redux-dom-mutation-observer/issues"
     },
     "homepage": "https://github.com/karatsuba/redux-dom-mutation-observer#readme",
-    "dependencies": {},
+    "dependencies": {
+        "redux": "^4.0.5"
+    },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.23.0",
         "@typescript-eslint/parser": "^2.23.0",
