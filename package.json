@@ -9,7 +9,10 @@
         "dev": "npm run clean && webpack --progress --watch",
         "build:dev": "npm run clean && webpack --progress",
         "build:prod": "npm run clean && webpack --progress --env.production",
-        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+        "test": "jest",
+        "test:watch": "npm test -- --watch",
+        "test:cov": "npm test -- --coverage"
     },
     "repository": {
         "type": "git",
@@ -25,12 +28,18 @@
         "redux": "^4.0.5"
     },
     "devDependencies": {
+        "@types/jest": "^25.1.4",
+        "@types/jsdom": "^16.1.1",
+        "@types/node": "^12.12.31",
         "@typescript-eslint/eslint-plugin": "^2.23.0",
         "@typescript-eslint/parser": "^2.23.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.10.0",
         "eslint-plugin-prettier": "^3.1.2",
+        "jest": "^25.1.0",
+        "jsdom": "^16.2.1",
         "prettier": "^1.19.1",
+        "ts-jest": "^25.2.1",
         "ts-loader": "^6.2.1",
         "typescript": "^3.8.3",
         "webpack": "^4.42.0",
