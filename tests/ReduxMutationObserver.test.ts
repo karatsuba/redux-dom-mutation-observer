@@ -1,20 +1,19 @@
 import { JSDOM } from 'jsdom';
 import ReduxMutationObserver from '../src/ReduxMutationObserver';
-import { ObserveAction, observe } from '../src/actions/actions';
+import { ObserveAction, observe, mutationRecord } from '../src/actions/actions';
 
 declare global {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace NodeJS {
         interface Global {
             MutationObserver: any;
-            document: any;
+            document: Document;
         }
     }
 }
 
-global.document = new JSDOM().window.document;
-
 describe('ReduxMutationObserver', () => {
+    global.document = new JSDOM().window.document;
+
     const store = { dispatch: jest.fn(i => i), getState: jest.fn() };
     const options: MutationObserverInit = {
         subtree: true,
@@ -22,6 +21,7 @@ describe('ReduxMutationObserver', () => {
     };
 
     let reduxMutationObserver: ReduxMutationObserver;
+    let mutationCallback: (mutations: MutationRecord[]) => void;
 
     const observeMock = jest.fn();
     const disconnectMock = jest.fn();
@@ -33,16 +33,19 @@ describe('ReduxMutationObserver', () => {
         observeMock.mockClear();
         disconnectMock.mockClear();
 
-        global.MutationObserver = jest.fn(() => ({
-            observe: observeMock,
-            disconnect: disconnectMock,
-            takeRecords: jest.fn()
-        }));
+        global.MutationObserver = jest.fn(callback => {
+            mutationCallback = callback;
+            return {
+                observe: observeMock,
+                disconnect: disconnectMock,
+                takeRecords: jest.fn()
+            };
+        });
     });
 
     describe('observe', () => {
-        const action = observe('targetId');
         const getElementByIdSpy = jest.spyOn(global.document, 'getElementById');
+        const action = observe('targetId');
 
         beforeEach(() => {
             getElementByIdSpy.mockClear();
@@ -54,7 +57,17 @@ describe('ReduxMutationObserver', () => {
             expect(global.MutationObserver).toHaveBeenCalledTimes(1);
         });
 
-        it('should not get a target node and do not start observe', () => {
+        it('should use already crealted MutationObserver instance', () => {
+            reduxMutationObserver.observe(store, action as ObserveAction);
+            reduxMutationObserver.observe(store, action as ObserveAction);
+            reduxMutationObserver.observe(store, action as ObserveAction);
+
+            expect(global.MutationObserver).toHaveBeenCalledTimes(1);
+        });
+
+        it('should do not start observe when there is no target node found', () => {
+            getElementByIdSpy.mockReturnValue(null);
+
             reduxMutationObserver.observe(store, action as ObserveAction);
 
             expect(global.document.getElementById).toHaveBeenCalledWith('targetId');
@@ -69,6 +82,38 @@ describe('ReduxMutationObserver', () => {
 
             expect(global.document.getElementById).toHaveBeenCalledWith('targetId');
             expect(observeMock).toHaveBeenCalledWith(target, options);
+        });
+
+        it('should dispatch mutation records', () => {
+            const div = global.document.createElement('div');
+            const mutation: MutationRecord = {
+                type: 'childList',
+                target: div,
+                addedNodes: div.childNodes,
+                removedNodes: div.childNodes,
+                attributeName: null,
+                attributeNamespace: null,
+                nextSibling: null,
+                previousSibling: null,
+                oldValue: null
+            };
+
+            mutationCallback([mutation]);
+
+            expect(store.dispatch).toHaveBeenCalledWith(mutationRecord(mutation));
+        });
+    });
+
+    describe('disconnect', () => {
+        it('should stop observing', () => {
+            // init observe action and create observer
+            const action = observe('targetId');
+            reduxMutationObserver.observe(store, action as ObserveAction);
+
+            // disconnect
+            reduxMutationObserver.disconnect();
+
+            expect(disconnectMock).toHaveBeenCalledTimes(1);
         });
     });
 });

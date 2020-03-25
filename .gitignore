@@ -11,6 +11,9 @@ types/
 .vscode
 *.code-workspace
 
+#coverage
+coverage/
+
 #nvm
 .nvmrc
 
