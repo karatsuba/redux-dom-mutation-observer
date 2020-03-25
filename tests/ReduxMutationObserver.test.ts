@@ -115,5 +115,12 @@ describe('ReduxMutationObserver', () => {
 
             expect(disconnectMock).toHaveBeenCalledTimes(1);
         });
+
+        it('should do nothing if observer instance is missing', () => {
+            // disconnect
+            reduxMutationObserver.disconnect();
+
+            expect(disconnectMock).toHaveBeenCalledTimes(0);
+        });
     });
 });
