@@ -1,4 +1,4 @@
-# redux-dom-mutation-observer
+# redux-dom-mutation-observer 👀
 
 `redux-dom-mutation-observer` is a Redux middleware for managing DOM tree changes over [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) Web API.
 
@@ -37,7 +37,7 @@ const store = createStore(reducer, applyMiddleware(mutationObserverMiddleware));
 
 `redux-dom-mutation-observer` will dispatch every mutation record action automatically, based on what the internal MutationObserver will get. Some actions will need to be dispatched by you.
 
-### Actions dispatched by user
+### User dispatched actions
 
 Feel free to use action creator functions included in the module.
 
@@ -76,7 +76,7 @@ store.dispatch(disconnect());
 
 ---
 
-### Actions dispatched by middleware
+### Middleware dispatched actions
 
 ##### `REDUX_DOM_MUTATION_OBSERVER::MUTATION_RECORD`
 
@@ -94,6 +94,10 @@ Dispatched when the MutationObserver receive a DOM change that qualifies given t
     };
 }
 ```
+
+## Projects using redux-dom-mutation-observer
+
+-   [workflowy-link-preview](https://github.com/karatsuba/workflowy-link-preview) - URLs previewer browser extension for [WorkFlowy](https://workflowy.com/).
 
 ## Support
 
