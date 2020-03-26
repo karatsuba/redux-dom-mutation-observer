@@ -15,10 +15,6 @@ describe('ReduxMutationObserver', () => {
     global.document = new JSDOM().window.document;
 
     const store = { dispatch: jest.fn(i => i), getState: jest.fn() };
-    const options: MutationObserverInit = {
-        subtree: true,
-        childList: true
-    };
 
     let reduxMutationObserver: ReduxMutationObserver;
     let mutationCallback: (mutations: MutationRecord[]) => void;
@@ -27,7 +23,7 @@ describe('ReduxMutationObserver', () => {
     const disconnectMock = jest.fn();
 
     beforeEach(() => {
-        reduxMutationObserver = new ReduxMutationObserver(options);
+        reduxMutationObserver = new ReduxMutationObserver();
 
         store.dispatch.mockClear();
         observeMock.mockClear();
@@ -45,7 +41,7 @@ describe('ReduxMutationObserver', () => {
 
     describe('observe', () => {
         const getElementByIdSpy = jest.spyOn(global.document, 'getElementById');
-        const action = observe('targetId');
+        const action = observe('targetId', { childList: true });
 
         beforeEach(() => {
             getElementByIdSpy.mockClear();
@@ -81,7 +77,7 @@ describe('ReduxMutationObserver', () => {
             reduxMutationObserver.observe(store, action as ObserveAction);
 
             expect(global.document.getElementById).toHaveBeenCalledWith('targetId');
-            expect(observeMock).toHaveBeenCalledWith(target, options);
+            expect(observeMock).toHaveBeenCalledWith(target, { childList: true });
         });
 
         it('should dispatch mutation records', () => {
@@ -107,7 +103,7 @@ describe('ReduxMutationObserver', () => {
     describe('disconnect', () => {
         it('should stop observing', () => {
             // init observe action and create observer
-            const action = observe('targetId');
+            const action = observe('targetId', { childList: true });
             reduxMutationObserver.observe(store, action as ObserveAction);
 
             // disconnect

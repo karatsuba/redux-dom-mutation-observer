@@ -16,11 +16,20 @@ describe('actions', () => {
         const action = {
             type: 'REDUX_DOM_MUTATION_OBSERVER:OBSERVE',
             payload: {
-                targetId: 'targetId'
+                targetId: 'targetId',
+                options: {
+                    subtree: true,
+                    childList: true
+                }
             }
         };
 
-        expect(action).toEqual(actions.observe('targetId'));
+        expect(action).toEqual(
+            actions.observe('targetId', {
+                subtree: true,
+                childList: true
+            })
+        );
     });
 
     it('should create disconnect action', () => {
