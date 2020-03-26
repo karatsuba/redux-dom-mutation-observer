@@ -4,13 +4,15 @@ export type ObserveAction = {
     type: typeof OBSERVE;
     payload: {
         targetId: string;
+        options: MutationObserverInit;
     };
 };
 
-export const observe = (targetId: string): Action => ({
+export const observe = (targetId: string, options: MutationObserverInit): Action => ({
     type: OBSERVE,
     payload: {
-        targetId
+        targetId,
+        options
     }
 });
 
