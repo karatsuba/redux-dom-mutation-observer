@@ -22,7 +22,7 @@ ReduxMutationObserverMock.mockImplementation(options => {
 
 const mockStore = () => {
     const store = { getState: jest.fn(), dispatch: jest.fn() };
-    const wrapper = middleware({})(store);
+    const wrapper = middleware()(store);
     const dispatch = wrapper(i => i);
 
     return { store, wrapper, dispatch };
@@ -36,14 +36,9 @@ describe('Middleware', () => {
     });
 
     it('should create ReduxMutationObserver with options', () => {
-        const options: MutationObserverInit = {
-            subtree: true,
-            childList: true
-        };
+        middleware();
 
-        middleware(options);
-
-        expect(ReduxMutationObserverMock).toHaveBeenCalledWith({ childList: true, subtree: true });
+        expect(ReduxMutationObserverMock).toHaveBeenCalledTimes(1);
     });
 
     it('should handle observe action', () => {
@@ -51,11 +46,20 @@ describe('Middleware', () => {
         const dispatchedAction = {
             type: 'REDUX_DOM_MUTATION_OBSERVER:OBSERVE',
             payload: {
-                targetId: 'targetId'
+                targetId: 'targetId',
+                options: {
+                    subtree: true,
+                    childList: true
+                }
             }
         };
 
-        const action = dispatch(observe('targetId'));
+        const action = dispatch(
+            observe('targetId', {
+                subtree: true,
+                childList: true
+            })
+        );
 
         expect(action).toEqual(dispatchedAction);
         expect(observeMock).toHaveBeenCalledWith(store, dispatchedAction);

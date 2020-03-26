@@ -3,8 +3,8 @@ import ReduxMutationObserver from '../ReduxMutationObserver';
 import { OBSERVE, DISCONNECT } from '../actions/types';
 import { Action, ObserveAction } from '../actions/actions';
 
-export default (options: MutationObserverInit): Middleware => {
-    const reduxMutationObserver = new ReduxMutationObserver(options);
+export default (): Middleware => {
+    const reduxMutationObserver = new ReduxMutationObserver();
 
     return (store: MiddlewareAPI) => (next: Dispatch) => (action: Action) => {
         if (action.type === OBSERVE) {
