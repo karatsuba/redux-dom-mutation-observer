@@ -18,7 +18,7 @@ $ npm i redux-dom-mutation-observer
 
 ## Configuration
 
-Easily add the middleware to your Redux story with `applyMiddleware`. To do so, you have to create a middleware instance.
+Easily add the middleware to your Redux store with `applyMiddleware`. To do so, you have to create a middleware instance.
 
 ```js
 import { applyMiddleware, createStore } from 'redux';
@@ -80,7 +80,7 @@ store.dispatch(disconnect());
 
 ##### `REDUX_DOM_MUTATION_OBSERVER::MUTATION_RECORD`
 
-Dispatched when the MutationObserver receive a DOM change that qualifies given the targeted node or subtree and options. The payload includes a `mutation` key which is a [MutationRecord](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord).
+Dispatched when the MutationObserver receives a DOM change that qualifies given the targeted node or subtree and options. The payload includes a `mutation` key which is a [MutationRecord](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord).
 
 ###### Structure
 
