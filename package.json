@@ -9,10 +9,11 @@
         "dev": "npm run clean && webpack --progress --watch",
         "build:dev": "npm run clean && webpack --progress",
         "build:prod": "npm run clean && webpack --progress --env.production",
-        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
         "test": "jest",
         "test:watch": "npm test -- --watch",
-        "test:cov": "npm test -- --coverage"
+        "test:cov": "npm test -- --coverage",
+        "prepare": "npm run lint && npm run build:prod && npm run test"
     },
     "files": [
         "dist",
