@@ -20,6 +20,12 @@
     },
     "author": "Roman Chukhan",
     "license": "MIT",
+    "keywords": [
+        "redux",
+        "middleware",
+        "dom",
+        "mutationobserver"
+    ],
     "bugs": {
         "url": "https://github.com/karatsuba/redux-dom-mutation-observer/issues"
     },
