@@ -1,5 +1,9 @@
 # redux-dom-mutation-observer 👀
 
+[![build status](https://img.shields.io/travis/karatsuba/redux-dom-mutation-observer.svg/master.svg?style=flat-square)](https://travis-ci.org/karatsuba/redux-dom-mutation-observer)
+
+[![npm version](https://img.shields.io/npm/v/redux-dom-mutation-observer.svg?style=flat-square)](https://www.npmjs.com/package/redux-dom-mutation-observer)
+
 `redux-dom-mutation-observer` is a Redux middleware for managing DOM tree changes over [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) Web API.
 
 This middleware uses actions to interact with a MutationObserver instance: observe mutations, disconnecting and receiving mutation records.
