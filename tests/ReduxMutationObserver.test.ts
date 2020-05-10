@@ -14,7 +14,7 @@ declare global {
 describe('ReduxMutationObserver', () => {
     global.document = new JSDOM().window.document;
 
-    const store = { dispatch: jest.fn(i => i), getState: jest.fn() };
+    const store = { dispatch: jest.fn((i) => i), getState: jest.fn() };
 
     let reduxMutationObserver: ReduxMutationObserver;
     let mutationCallback: (mutations: MutationRecord[]) => void;
@@ -29,7 +29,7 @@ describe('ReduxMutationObserver', () => {
         observeMock.mockClear();
         disconnectMock.mockClear();
 
-        global.MutationObserver = jest.fn(callback => {
+        global.MutationObserver = jest.fn((callback) => {
             mutationCallback = callback;
             return {
                 observe: observeMock,
