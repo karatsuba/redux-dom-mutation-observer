@@ -12,7 +12,7 @@ export default class ReduxMutationObserver {
     observe = ({ dispatch }: MiddlewareAPI, { payload }: ObserveAction): void => {
         if (!this.observer) {
             this.observer = new MutationObserver((mutations: MutationRecord[]) => {
-                mutations.forEach(mutation => dispatch(mutationRecord(mutation)));
+                mutations.forEach((mutation) => dispatch(mutationRecord(mutation)));
             });
         }
 

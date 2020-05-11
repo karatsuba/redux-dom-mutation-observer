@@ -9,7 +9,7 @@ const ReduxMutationObserverMock = ReduxMutationObserver as jest.Mock<ReduxMutati
 const observeMock = jest.fn();
 const disconnectMock = jest.fn();
 
-ReduxMutationObserverMock.mockImplementation(options => {
+ReduxMutationObserverMock.mockImplementation((options) => {
     class ReduxMutationObserverMockClass {
         private options = options;
         observe = observeMock;
@@ -23,7 +23,7 @@ ReduxMutationObserverMock.mockImplementation(options => {
 const mockStore = () => {
     const store = { getState: jest.fn(), dispatch: jest.fn() };
     const wrapper = middleware()(store);
-    const dispatch = wrapper(i => i);
+    const dispatch = wrapper((i) => i);
 
     return { store, wrapper, dispatch };
 };
